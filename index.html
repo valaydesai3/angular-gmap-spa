@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+		<base href="/"> 
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+    </head>
+    <body ng-app="addLocApp">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+		
+		<div class="container">
+		  <div class="row">
+			<div class="col-sm-3 col-md-6 col-lg-3 sidebar" ng-controller="AddressController">
+			  <label>Group By: </label>
+			  <select class="form-control" ng-model="selectedItem" ng-change="update(selectedItem)" ng-options="item.value for item in groupCategory">
+				<option value="" selected>Select your option</option>				
+			  </select>
+			  <div class="list-group list-group-container" ng-class="{'active':list-group-container}" ng-if="showList">
+				<div class="list-group" ng-repeat="(key, value) in addresses">
+				  <label>{{ key }}</label>
+				  <ul class="list-unstyled">
+					  <li class="list-item" ng-repeat="addrDetail in value">
+						<a href="/detail/{{addrDetail.lat}}/{{addrDetail.lng}}" class="list-group-item">
+							<p>								
+								{{addrDetail.address}}<br/>
+								{{addrDetail.city}},<br/>{{addrDetail.country}}
+								{{addrDetail.postalCode}}
+							</p>
+						</a>
+					  </li>
+				  </ul>
+				</div>
+			  </div>
+
+			</div>
+			<div class="col-sm-9 col-md-6 col-lg-9">
+				<div ng-view></div>				
+			</div>
+		  </div>
+		</div>
+		
+		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyATjcJN-kXWfGk0_pcVWijVFKnBMuBarXk&language=en" defer"></script>
+		<script src="node_modules/underscore/underscore-min.js"></script>		
+		<script src="node_modules/angular/angular.min.js"></script>		
+		<script src="node_modules/angular-route/angular-route.min.js"></script>				
+		<script src="js/service.js"></script>
+		<script src="js/main.js"></script>
+		
+    </body>
+</html>

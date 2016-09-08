@@ -1,0 +1,22 @@
+.sidebar{
+    height: 100%;    
+    overflow: hidden;
+}
+.list-group-container{
+    margin-top: 10px;
+	height: 500px;
+    overflow-y: scroll;
+    padding-right: 17px;
+}
+.list-item{
+	padding-top: 5px;
+}
+#map {
+	height: 90vh;
+	width: 68vw;
+	box-shadow: 3px 3px 10px gray;
+	float: left;
+	border: 5px solid white;
+	border-radius: 10px;
+	margin-right: 20px;
+}
