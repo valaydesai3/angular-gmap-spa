@@ -13,8 +13,23 @@ var addLocApp = angular.module('addLocApp', ['ngRoute', 'AddressService'])
     });
 
 addLocApp.constant('_', window._);
+addLocApp.factory('initMapFactory', function($window){
+    var initializeMap = function(){
+        $window.map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 0,
+                    lng: 0
+                },
+                zoom: 2
+            });
+        }
+    
+    return{
+        reset : initializeMap    
+    }
+});
 
-addLocApp.controller('AddressController', function ($scope, LocationData, _) {
+addLocApp.controller('AddressController', function ($scope, $window, initMapFactory, LocationData, _) {
     $scope.status = '';
     $scope.addresses = [];
    
@@ -48,21 +63,16 @@ addLocApp.controller('AddressController', function ($scope, LocationData, _) {
 			}
 		} else {
 			    $scope.showList = false;
+                initMapFactory.reset();
 		}
 	}
     getLocationDetails();
 
 });
 
-addLocApp.controller('MapController', function ($scope, $window, $route, $routeParams, _) {
+addLocApp.controller('MapController', function ($scope, $window, initMapFactory, $route, $routeParams, _) {
 	
-	$window.map = new google.maps.Map(document.getElementById('map'), {
-        center: {
-            lat: 0,
-            lng: 0
-        },
-        zoom: 2
-    });
+	initMapFactory.reset();
 	
 	var lat = $routeParams.lat,
         lng = $routeParams.lng,	
