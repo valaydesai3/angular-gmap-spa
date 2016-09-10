@@ -37,7 +37,7 @@ addLocApp.controller('AddressController', function ($scope, LocationData, _) {
 		$scope.active = true;
 		if (item !== null) {
 			var itemId = item.id;
-			if (itemId === 1) {
+			if (itemId === "1") {
 				$scope.data = angular.copy($scope.orig);
 				$scope.addresses = _.groupBy($scope.data, function (d) {return d.city; });
 				$scope.showList = true;
